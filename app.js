@@ -44,6 +44,10 @@ app.post('/recieveRecording', async function (req, res) {
     await newVid.save()
 });
 
+app.get('/stats', (req, res) => {
+    res.send("Stats fetched from db are shown here");
+})
+
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
 })
