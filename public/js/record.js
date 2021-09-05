@@ -84,7 +84,21 @@ function download(){
   var reader = new FileReader();
   reader.onload = function () {
     let base64str = btoa(reader.result);
+    console.log(base64str);
     //send request to server
+    var xhr = new XMLHttpRequest();
+    var url = "recieveRecording";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log("Dide sth");
+        }
+  };
+  var data = JSON.stringify(
+    {"startTime": "0", "endTime": "10", "dataBase64":base64str}
+    );
+  xhr.send(data);
   }
   reader.readAsBinaryString(blob);
   

@@ -5,6 +5,7 @@ const ejsMate = require('ejs-mate');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
+const bodyParser = require('body-parser')
 //const RawVid = require('./models/RawVid');
 
 mongoose.connect('mongodb://localhost:27017/smartly-surf', {
@@ -25,8 +26,10 @@ app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'))
 
-app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
+app.use(express.json({limit: '5000mb'}));
+app.use(express.urlencoded({limit: '5000mb'}));
+
 app.use("/public", express.static('public'))
 
 app.get('/', (req, res) => {
@@ -38,7 +41,9 @@ app.get('/record', (req, res) => {
 });
 
 app.post('/recieveRecording', (req, res) => {
-    res.send("Got a recording!!!!")
+    console.dir(req)
+    console.dir(res)
+    res.send("recieved");
 });
 
 app.all('*', (req, res, next) => {
