@@ -11,6 +11,9 @@ let timeoutID;
 //let tintervalID;
 //let ttimeoutID;
 
+let startTime;
+let endTime;
+
 let mediaRecorder;
 let recordedBlobs;
 
@@ -51,7 +54,7 @@ function startMonitoring(){
         recordButton.textContent = 'Stop Monitoring';
         startRecording();})
     .catch(function(err){
-        errorMsgElement.innerHTML = `Refresh the page and enable camera acess`;
+        errorMsgElement.innerHTML = `Enable camera access <a href="chrome://settings/content/camera">here</a> `;
     })
 }
 
@@ -131,7 +134,6 @@ function startRecording() {
   } catch (e) {
     console.error('Exception while creating MediaRecorder:', e);
     errorMsgElement.innerHTML = `Exception while creating MediaRecorder: ${JSON.stringify(e)}`;
-    return;
   }
 
   console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
@@ -162,9 +164,13 @@ function handleSuccess(stream) {
 }
 
 async function init(constraints) {
+  try {
     const stream = await navigator.mediaDevices.getUserMedia(constraints);
     handleSuccess(stream);
-    print(stream)
+  } catch (e) {
+    console.error('navigator.getUserMedia error:', e);
+    errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
+  }
 }
 
   
