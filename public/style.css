@@ -1,0 +1,27 @@
+body {
+  text-align: center;
+  min-height: 100vh;
+  width: 100%;
+  background-position: center;
+  background-size: cover;
+  padding-left: 6%;
+  padding-right: 6%;
+}
+
+.first {
+  margin-left: 4vh;
+}
+
+.but {
+  border: solid #f23869;
+  background-color: #f23869;
+  color: white;
+  font-size: large;
+  border-radius: 50px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+footer {
+  margin-top: auto;
+}
