@@ -12,7 +12,7 @@
 <body class="d-flex flex-column vh-100" style="background-image: url(/public/images/background.png);">
     <header id="header">
         <div class="text-justify container-fluid">
-            <nav class="navbar navbar-expand-lg navbar-dark " style="text-align: right;">
+            <nav class="navbar navbar-expand-lg navbar-dark" style="text-align: right;">
                 <button class="navbar-toggler me-4 border border-info" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon color-dark"></span>
                 </button>
@@ -23,23 +23,25 @@
                         <li class="nav-item"><a class="nav-link" href="#"><span class="navbar-text text-end text-dark" style="font-size: 24px; padding-left: 12px;">Login</span></a></li>
                     </ul>
                 </div>
-                <a href="home.html" style="display: in-line block; float:right;"><img src="/public/images/logo.png" alt="Logo" id="logo" width="180vw"></a>
+                <a href="home.html" class="mr-5" style="display: in-line block; float:right;"><img src="/public/images/logo.png" alt="Logo" id="logo" width="180vw"></a>
             </nav>
         </div>
     </header>
    
     <div class="container">
-        <div class="first">
-            <h1>Hello Joe,</h1>
+        <div class="first" style="text-align: center; margin-top:3vh;">
+            <h1>Hello Joe,</h1> <br>
             <h3>click the button below and start <br>bowsing websites! Leave the work to us :D </h3>
-            <a href="recording.ejs" type="button" class="but">Get Started</a>
-            <p>Once begin, we will have access to your camera to detect your facial expression.</p>
+            <button class="btn btn-primary my-3"><a href="recording.ejs" type="button" style="color:white; text-decoration:none;">Get Started</a></button> 
+            <br><p>Once begin, we will have access to your <br>camera to detect your facial expression.</p>
         </div>
 
     </div>
 <footer>
+    <div style="text-align:center; margin-top:10vh">
     <h6>We respect your privacy. Your videos are automatically deleted from our data base <br>after ___ days. Learn more about our privacy policy here.</h6>
     <h5>Copyright © 2021 SmartlySurf. All rights reserved.</h5>
+    </div>
 </footer>
 </body>
 
