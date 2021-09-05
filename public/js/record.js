@@ -8,8 +8,8 @@ const saveInterval = oneSecond*10;
 let intervalID;
 let timeoutID;
 
-let tintervalID;
-let ttimeoutID;
+//let tintervalID;
+//let ttimeoutID;
 
 let mediaRecorder;
 let recordedBlobs;
@@ -79,6 +79,15 @@ recordButton.addEventListener('click', () => {
 function download(){
   console.log("downloading")
   const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
+  console.log(blob);
+
+  var reader = new FileReader();
+  reader.onload = function () {
+    let base64str = btoa(reader.result);
+    //send request to server
+  }
+  reader.readAsBinaryString(blob);
+  
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.style.display = 'none';
