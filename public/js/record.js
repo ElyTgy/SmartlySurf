@@ -1,15 +1,11 @@
 
         'use strict';
 
-//TODO: make modifaible in the same page by user
 const oneSecond = 1000;
 const oneMinute = 60000
 const saveInterval = oneSecond*10;
 let intervalID;
 let timeoutID;
-
-//let tintervalID;
-//let ttimeoutID;
 
 let startTime;
 let endTime;
@@ -21,33 +17,14 @@ const errorMsgElement = document.querySelector('span#errorMsg');
 const saveSucess = document.querySelector('span#saved');
 const recordedVideo = document.querySelector('video#recorded');
 const recordButton = document.querySelector('button#record');
-//const testButton = document.querySelector('button#test');
 
-/*testButton.addEventListener('click', () => {
-    if (testButton.textContent === 'Start test') {
-      testStart();
-    } else {
-      testStop();
-    }
-  });
-
-function testStart(){
-    testButton.innerHTML = "Stopp test"
-    tintervalID = setInterval(function(){
-    console.log("started recording with interval id", tintervalID);
-    ttimeoutID = setTimeout(function() {
-        console.log("dtopped recording with interval", ttimeoutID);
-    }, saveInterval - oneSecond)
-}, saveInterval)}
-
-function testStop()
-{
-    clearTimeout(ttimeoutID);  
-    clearInterval(tintervalID);
-    console.log("Stopped interval", tintervalID)
-    console.log("stopped timeput", ttimeoutID)
-    testButton.textContent = 'Start test';
-}*/
+recordButton.addEventListener('click', () => {
+  if (recordButton.textContent === 'Start Monitoring') {
+    startMonitoring();
+  } else {
+    stopRecording();
+  }
+});
 
 function startMonitoring(){
     startCamera()
@@ -73,61 +50,6 @@ async function startCamera()
       await init(constraints);
 }
 
-recordButton.addEventListener('click', () => {
-  if (recordButton.textContent === 'Start Monitoring') {
-    startMonitoring();
-  } else {
-    stopRecording();
-  }
-});
-
-function download(){
-  console.log("downloading")
-  const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
-  console.log(blob);
-
-  var reader = new FileReader();
-  reader.onload = function () {
-    let base64str = btoa(reader.result);
-    console.log(base64str);
-    //send request to server
-    var xhr = new XMLHttpRequest();
-    var url = "recieveRecording";
-    xhr.open("POST", url, true);
-    xhr.setRequestHeader("Content-Type", "application/json");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-            console.log("Dide sth");
-        }
-  };
-  var data = JSON.stringify(
-    {"startTime": startTime, "endTime": endTime, "dataBase64":base64str}
-    );
-  xhr.send(data);
-  }
-  reader.readAsBinaryString(blob);
-  
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.style.display = 'none';
-  a.href = url;
-  a.download = 'test.mp4';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => {
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-  }, 100);
-
-  saveSucess.innerHTML = "Successfully saved video! Please be patient while we update your information"
-}
-
-function handleDataAvailable(event) {
-  console.log('handleDataAvailable', event);
-  if (event.data && event.data.size > 0) {
-    recordedBlobs.push(event.data);
-  }
-}
 
 function startRecording() {
   console.log("Start Recording")
@@ -154,10 +76,59 @@ function startRecording() {
   console.log('MediaRecorder started', mediaRecorder);
 }
 
+
+function download(){
+  console.log("downloading")
+  const blob = new Blob(recordedBlobs, {type: 'video/mp4'});
+  console.log(blob);
+
+  var reader = new FileReader();
+  reader.onload = function () {
+    let base64str = btoa(reader.result);
+    console.log(base64str);
+    //send request to server
+    var xhr = new XMLHttpRequest();
+    var url = "recieveRecording";
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+            console.log("Dide sth");
+        }
+  };
+  var data = JSON.stringify(
+    {"startTime": startTime, "endTime": endTime, "video":base64str}
+    );
+  xhr.send(data);
+  }
+  reader.readAsBinaryString(blob);
+  
+  const url = window.URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.style.display = 'none';
+  a.href = url;
+  a.download = 'test.mp4';
+  document.body.appendChild(a);
+  a.click();
+  setTimeout(() => {
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  }, 100);
+
+  saveSucess.innerHTML = "Successfully saved video! Please be patient while we update your information"
+}
+
 function stopRecording() {
   console.log("Stopped reording")
   mediaRecorder.stop();
   recordButton.textContent = 'Start Monitoring';
+}
+
+function handleDataAvailable(event) {
+  console.log('handleDataAvailable', event);
+  if (event.data && event.data.size > 0) {
+    recordedBlobs.push(event.data);
+  }
 }
 
 function handleSuccess(stream) {
