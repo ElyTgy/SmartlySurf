@@ -4,9 +4,9 @@ const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
-const methodOverride = require('method-override');
+const methodOverride = require('method-override'); 
 const bodyParser = require('body-parser')
-//const RawVid = require('./models/RawVid');
+const RawVideo = require('./models/RawVid');
 
 mongoose.connect('mongodb://localhost:27017/smartly-surf', {
     useNewUrlParser: true,
@@ -29,7 +29,6 @@ app.set('views', path.join(__dirname, 'views'))
 app.use(methodOverride('_method'));
 app.use(express.json({limit: '5000mb'}));
 app.use(express.urlencoded({limit: '5000mb'}));
-
 app.use("/public", express.static('public'))
 
 app.get('/', (req, res) => {
@@ -40,10 +39,9 @@ app.get('/record', (req, res) => {
     res.render('recording.ejs')
 });
 
-app.post('/recieveRecording', (req, res) => {
-    console.dir(req)
-    console.dir(res)
-    res.send("recieved");
+app.post('/recieveRecording', async function (req, res) {
+    let newVid = new RawVideo({startTime:req.body.startTime, endTime:req.body.endTime, video:req.body.video});
+    await newVid.save()
 });
 
 app.all('*', (req, res, next) => {
