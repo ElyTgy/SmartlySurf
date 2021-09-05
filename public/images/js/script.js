@@ -1,4 +1,5 @@
-'use strict';
+
+        'use strict';
 
 //TODO: make modifaible in the same page by user
 const oneSecond = 1000;
@@ -142,3 +143,5 @@ async function init(constraints) {
     handleSuccess(stream);
     print(stream)
 }
+
+  
