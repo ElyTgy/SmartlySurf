@@ -41,10 +41,9 @@ app.get('/record', (req, res) => {
 });
 
 app.post('/recieveRecording', (req, res) => {
-    console.dir(req)
-    console.dir(res)
-    res.send("recieved");
+    saveCamData(req.body);
 });
+
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Page Not Found', 404))
@@ -59,3 +58,8 @@ app.use((err, req, res, next) => {
 app.listen(3000, () => {
     console.log('Serving on port 3000')
 })
+
+//put in seperate file:
+function saveCamData(data){
+    console.log(data)
+}

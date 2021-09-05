@@ -18,6 +18,7 @@ let mediaRecorder;
 let recordedBlobs;
 
 const errorMsgElement = document.querySelector('span#errorMsg');
+const saveSucess = document.querySelector('span#saved');
 const recordedVideo = document.querySelector('video#recorded');
 const recordButton = document.querySelector('button#record');
 //const testButton = document.querySelector('button#test');
@@ -52,6 +53,7 @@ function startMonitoring(){
     startCamera()
     .then(function(){
         recordButton.textContent = 'Stop Monitoring';
+        saveSucess.innerHTML = "";
         startRecording();})
     .catch(function(err){
         errorMsgElement.innerHTML = `Enable camera access <a href="chrome://settings/content/camera">here</a> `;
@@ -99,7 +101,7 @@ function download(){
         }
   };
   var data = JSON.stringify(
-    {"startTime": "0", "endTime": "10", "dataBase64":base64str}
+    {"startTime": startTime, "endTime": endTime, "dataBase64":base64str}
     );
   xhr.send(data);
   }
@@ -116,6 +118,8 @@ function download(){
     document.body.removeChild(a);
     window.URL.revokeObjectURL(url);
   }, 100);
+
+  saveSucess.innerHTML = "Successfully saved video! Please be patient while we update your information"
 }
 
 function handleDataAvailable(event) {
@@ -132,12 +136,13 @@ function startRecording() {
   try {
     mediaRecorder = new MediaRecorder(window.stream, options);
   } catch (e) {
-    console.error('Exception while creating MediaRecorder:', e);
+    console.error ('Exception while creating MediaRecorder:', e);
     errorMsgElement.innerHTML = `Exception while creating MediaRecorder: ${JSON.stringify(e)}`;
   }
 
   console.log('Created MediaRecorder', mediaRecorder, 'with options', options);
   mediaRecorder.onstop = (event) => {
+    endTime = Date.now();
     console.log('Recorder stopped: ', event);
     console.log('Recorded Blobs: ', recordedBlobs);
     download()
@@ -145,6 +150,7 @@ function startRecording() {
   };
   mediaRecorder.ondataavailable = handleDataAvailable;
   mediaRecorder.start();
+  startTime = Date.now();
   console.log('MediaRecorder started', mediaRecorder);
 }
 
