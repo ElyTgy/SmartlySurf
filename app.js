@@ -48,8 +48,11 @@ app.get('/record', (req, res) => {
 });
 
 app.post('/recieveRecording', async function (req, res) {
-    let newVid = new RawVideo({startTime:req.body.startTime, endTime:req.body.endTime, video:req.body.video});
-    await newVid.save()
+    if(req.body.video !== "")
+    {
+        let newVid = new RawVideo({startTime:req.body.startTime, endTime:req.body.endTime, video:req.body.video});
+        await newVid.save()
+    }
 });
 
 app.post('/recieveTabTime', async function (req, res) {
