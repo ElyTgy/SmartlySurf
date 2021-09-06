@@ -4,9 +4,9 @@
 <div class="card" mb-3>
     <div class="row">
         <div class="col-md-10">
-            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[0]['url'] %>}`><%= finalData[0]["website_name"] %></a> in minutes </h5>
-            label: `Distibution of emotion displays for ${item["website_name"]} in mins`,
-            <canvas id="canvas 0" width="400" height="400"></canvas>
+            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[0]['url'] %>}`><%= finalData[0]["website_name"] %></a> in minutes </h5>`,
+            <canvas id="bar 0" width="400" height="400"></canvas>
+            <canvas id="pie 0"></canvas>
         </div>
         </div>
     </div>
@@ -15,11 +15,63 @@
 <script>
     const i = 0;
     let currentItem = <%- JSON.stringify(finalData[0]);%>
-    makeChart(currentItem, "canvas 0")
+    makeChart(currentItem, "bar 0")
+    makePie(currentItem, "pie 0")
     //console.log(currentItem["emotions_names"])
+    
+    function makePie(item, id){
+        let ctx = document.getElementById(id).getContext('2d');
+        let labels = item["emotions_names"];
+        let colorHex = ['rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)',
+                    'rgba(167, 141, 138, 0.2)'];
+
+        let myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            datasets: [{
+            data: item["emotions_minutes"],
+            backgroundColor: colorHex
+            }],
+            labels: labels
+        },
+        options: {
+            responsive: true,
+            legend: {
+            position: 'bottom'
+            },
+            plugins: {
+            datalabels: {
+                color: '#fff',
+                anchor: 'end',
+                align: 'start',
+                offset: -10,
+                borderWidth: 2,
+                borderColor: '#fff',
+                borderRadius: 25,
+                backgroundColor: (context) => {
+                return context.dataset.backgroundColor;
+                },
+                font: {
+                weight: 'bold',
+                size: '10'
+                },
+                formatter: (value) => {
+                return value + ' %';
+                }
+            }
+            }
+        }
+        })
+    }
+    
     function makeChart(item, id){
-        var ctx = document.getElementById(id).getContext('2d');
-        var myChart = new Chart(ctx, {
+        let ctx = document.getElementById(id).getContext('2d');
+        let myChart = new Chart(ctx, {
         type: 'bar',
         data: {
             labels: item["emotions_names"] ,
