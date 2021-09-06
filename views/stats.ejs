@@ -8,12 +8,13 @@
     I think we shoud change the background to just bluw for this page and set canvas elements to inline
 -->
 <div class="card" mb-3>
-    <div class="row">
-        <div class="col-md-10">
-            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[0]['url'] %>}`><%= finalData[0]["website_name"] %></a> in minutes </h5>`,
+    <div class="row px-2 mx-4">
+        <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[0]['url'] %>}`><%= finalData[0]["website_name"] %></a> in minutes </h5>`,
+        <div class="col-lg-6">
             <canvas id="bar 0" width="400" height="400"></canvas>
-            <canvas id="pie 0"></canvas>
         </div>
+        <div class="col-lg-6">
+            <canvas id="pie 0"></canvas>
         </div>
     </div>
 </div>
@@ -22,55 +23,66 @@
     END OF ONE CARD
 -->
 <div class="card" mb-3>
-    <div class="row">
-        <div class="col-md-10">
-            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[1]["website_name"] %></a> in minutes </h5>`,
-            <canvas id="bar 1" width="400" height="400"></canvas>
-            <canvas id="pie 1"></canvas>
-        </div>
-        </div>
+    <div class="row px-2 mx-4">
+        <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[1]["website_name"] %></a> in minutes </h5>`,
+            <div class="col-lg-6">
+                <canvas id="bar 1" width="400" height="400"></canvas>
+            </div>
+            <div class="col-lg-6">
+                <canvas id="pie 1"></canvas>
+            </div>
     </div>
 </div>
 <div class="card" mb-3>
-    <div class="row">
-        <div class="col-md-10">
-            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[2]["website_name"] %></a> in minutes </h5>`,
-            <canvas id="bar 2" width="400" height="400"></canvas>
-            <canvas id="pie 2"></canvas>
-        </div>
-        </div>
+    <div class="row px-2 mx-4">
+        <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[2]["website_name"] %></a> in minutes </h5>`,
+            <div class="col-lg-6 col-sm-12">
+                <canvas id="bar 2" width="400" height="400"></canvas>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <canvas id="pie 2"></canvas>
+            </div>
     </div>
 </div>
+
 <div class="card" mb-3>
-    <div class="row">
-        <div class="col-md-10">
-            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[3]["website_name"] %></a> in minutes </h5>`,
-            <canvas id="bar 3" width="400" height="400"></canvas>
-            <canvas id="pie 3"></canvas>
-        </div>
-        </div>
+    <div class="row px-2 mx-4">
+        <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[3]["website_name"] %></a> in minutes </h5>`,
+            <div class="col-lg-6 col-sm-12">
+                <canvas id="bar 3" width="400" height="400"></canvas>
+            </div>
+            <div class="col-lg-6 col-sm-12">
+                <canvas id="pie 3"></canvas>
+            </div>
     </div>
 </div>
+
 <div class="card" mb-3>
-    <div class="row">
-        <div class="col-md-10">
-            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[4]["website_name"] %></a> in minutes </h5>`,
+    <div class="row px-2 mx-4">
+        <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[4]["website_name"] %></a> in minutes </h5>`,
+        <div class="col-lg-6 col-sm-12">
             <canvas id="bar 4" width="400" height="400"></canvas>
+        </div>
+        <div class="col-lg-6 col-sm-12">
             <canvas id="pie 4"></canvas>
         </div>
-        </div>
     </div>
 </div>
+
 <div class="card" mb-3>
-    <div class="row">
-        <div class="col-md-10">
-            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[5]["website_name"] %></a> in minutes </h5>`,
+    <div class="row mx-4 px-2">
+        <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[5]["website_name"] %></a> in minutes </h5>`,
+        <div class="col-lg-6 col-sm-12">
             <canvas id="bar 5" width="400" height="400"></canvas>
+        </div>
+        <div class="col-lg-6 col-sm-12">
             <canvas id="pie 5"></canvas>
         </div>
-        </div>
     </div>
 </div>
+
+<!--Gotten here so far-->
+
 <div class="card" mb-3>
     <div class="row">
         <div class="col-md-10">
