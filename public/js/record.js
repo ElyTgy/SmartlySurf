@@ -114,7 +114,7 @@ function download(){
     window.URL.revokeObjectURL(url);
   }, 100);
 
-  saveSucess.innerHTML = "Successfully saved video! Please be patient while we update your information"
+  saveSucess.innerHTML = "Successfully saved video! You will shortly be able to see your new analysis <a href='/stats'>here</a>"
 }
 
 function stopRecording() {
