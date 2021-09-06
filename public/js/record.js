@@ -105,18 +105,6 @@ function download(){
   xhr.send(data);
   }
   reader.readAsBinaryString(blob);
-  
-  const url = window.URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.style.display = 'none';
-  a.href = url;
-  a.download = 'test.mp4';
-  document.body.appendChild(a);
-  a.click();
-  setTimeout(() => {
-    document.body.removeChild(a);
-    window.URL.revokeObjectURL(url);
-  }, 100);
 
   saveSucess.innerHTML = "Successfully saved video! You will shortly be able to see your new analysis <a href='/stats'>here</a>"
 }

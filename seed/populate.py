@@ -7,20 +7,20 @@ collection = db.processedvideos
 
 collection.delete_many({})
 urls = [
-    "https://boot.belief.com/",
-    "https://bone.com/",
-    "https://boot.com",
-    "https://brick.com",
-    "https://art.com",
-    "https://alarm.com",
-    "https://bee.com",
-    "https://example.com",
-    "https://achiever.com",
-    "https://account.com",
-    "https://balance.com",
-    "https://educ.com",
-    "https://school.com",
-    "https://asdsfsdfsdf.com"
+    "https://www.instagram.com/",
+    "https://www.tiktok.com/",
+    "https://devpost.com/",
+    "https://www.codechef.com/",
+    "https://codeforces.com/",
+    "https://www.reddit.com/",
+    "https://www.canva.com/",
+    "https://discord.com/",
+    "https://www.facebook.com/",
+    "https://github.com/",
+    "https://WeGame.com",
+    "https://www.geeksforgeeks.org/",
+    "https://www.youtube.com/",
+    "https://www.topcoder.com/"
 ]
 
 

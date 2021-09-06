@@ -1,4 +1,14 @@
-# Emotion detection using deep learning
+# Usage:
+* Install MogoDB
+* create db called simply-surf
+* install pymongo
+* install requirements for emotion detetction model
+* install js packages
+* run seed/populate.js
+* run node app.js
+
+------
+## Emotion detection using deep learning
 
 ## Introduction
 
