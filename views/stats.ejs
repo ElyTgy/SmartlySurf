@@ -1,6 +1,12 @@
 <% layout('layouts/boilerplate')%>
 
 <h1>Activity Information from Top Visited Websites</h1>
+<!--
+    This is the start of the first card that ive copied ten time.
+    Add whatever stelsheet you want above this and change the style for this first one, i'll add it to the next ones
+    dont change the id id of the canvases
+    I think we shoud change the background to just bluw for this page and set canvas elements to inline
+-->
 <div class="card" mb-3>
     <div class="row">
         <div class="col-md-10">
@@ -12,13 +18,110 @@
     </div>
 </div>
 
+<!--
+    END OF ONE CARD
+-->
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-10">
+            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[1]["website_name"] %></a> in minutes </h5>`,
+            <canvas id="bar 1" width="400" height="400"></canvas>
+            <canvas id="pie 1"></canvas>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-10">
+            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[2]["website_name"] %></a> in minutes </h5>`,
+            <canvas id="bar 2" width="400" height="400"></canvas>
+            <canvas id="pie 2"></canvas>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-10">
+            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[3]["website_name"] %></a> in minutes </h5>`,
+            <canvas id="bar 3" width="400" height="400"></canvas>
+            <canvas id="pie 3"></canvas>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-10">
+            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[4]["website_name"] %></a> in minutes </h5>`,
+            <canvas id="bar 4" width="400" height="400"></canvas>
+            <canvas id="pie 4"></canvas>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-10">
+            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[5]["website_name"] %></a> in minutes </h5>`,
+            <canvas id="bar 5" width="400" height="400"></canvas>
+            <canvas id="pie 5"></canvas>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-10">
+            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[6]["website_name"] %></a> in minutes </h5>`,
+            <canvas id="bar 6" width="400" height="400"></canvas>
+            <canvas id="pie 6"></canvas>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-10">
+            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[7]["website_name"] %></a> in minutes </h5>`,
+            <canvas id="bar 7" width="400" height="400"></canvas>
+            <canvas id="pie 7"></canvas>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-10">
+            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[8]["website_name"] %></a> in minutes </h5>`,
+            <canvas id="bar 8" width="400" height="400"></canvas>
+            <canvas id="pie 8"></canvas>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-10">
+            <h5 class="card-title">Distibution of How Much Each Emotion Was Displayed While Visiting <a href=`${<%= finalData[1]['url'] %>}`><%= finalData[9]["website_name"] %></a> in minutes </h5>`,
+            <canvas id="bar 9" width="400" height="400"></canvas>
+            <canvas id="pie 9"></canvas>
+        </div>
+        </div>
+    </div>
+</div>
+
 <script>
-    const i = 0;
-    let currentItem = <%- JSON.stringify(finalData[0]);%>
-    makeChart(currentItem, "bar 0")
-    makePie(currentItem, "pie 0")
+    let allItems = <%- JSON.stringify(finalData);%>;
+    for(let i = 0; i < 10; i++)
+    {
+        let currentItem = allItems[i]
+        makeChart(currentItem, `bar ${i}`)
+        makePie(currentItem, `pie ${i}`)
+
+    }
     //console.log(currentItem["emotions_names"])
-    
     function makePie(item, id){
         let ctx = document.getElementById(id).getContext('2d');
         let labels = item["emotions_names"];
@@ -76,6 +179,7 @@
         data: {
             labels: item["emotions_names"] ,
             datasets: [{
+                label: "",
                 data: item["emotions_minutes"],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
@@ -106,7 +210,8 @@
                     text: "Emotions"
                 }
             }
-        }
+        },
+        legend:{display:false}
     });
 }
 
