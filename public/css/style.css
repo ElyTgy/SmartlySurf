@@ -23,7 +23,20 @@ body {
 }
 
 button{
-    
+    background-color: #A0BFFF;
+    color : #FFFFFF;
+    border: 2px solid;
+    border-radius: 1em;
+    padding: 0.5em 1.3em;
+    border-color: #D8F2FF;
+    transition: all 0.2s ;
+}
+
+button:hover{
+  border-color: #1b5572;
+  color: #1b5572;
+  box-shadow: 0 0.2em 0.2em -0.2em #320f44;
+  transform: translateY(-0.25em);
 }
 
 footer {
