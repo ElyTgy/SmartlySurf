@@ -142,3 +142,11 @@ footer {
   background: white;
   padding: 5px;
 }
+
+#gum ::before {
+  position: absolute;
+}
+
+#recorded ::before {
+  position: absolute;
+}
