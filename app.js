@@ -8,6 +8,8 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser')
 const RawVideo = require('./models/RawVid');
 const TabTime = require('./models/TabTime');
+const {spawn} = require("child_process");
+
 
 mongoose.connect('mongodb://localhost:27017/smartly-surf', {
     useNewUrlParser: true,
@@ -38,6 +40,19 @@ const corsOptions ={
    optionSuccessStatus:200,
 }
 app.use(cors(corsOptions)) 
+
+
+//TODO: refactor and take to another file
+const python = spawn('python', ['./EmotionRecognition/sample.py']);
+python.stdout.on('data', function (data) {
+    console.log('Pipe data from python script ...');
+    dataToSend = data.toString();
+   });
+   python.on('close', (code) => {
+   console.log(`child process close all stdio with code ${code}`);
+   console.log(dataToSend)
+   });
+console.log("test: After Script");
 
 app.get('/', (req, res) => {
     res.render("home.ejs")
