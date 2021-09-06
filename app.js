@@ -8,6 +8,7 @@ const methodOverride = require('method-override');
 const bodyParser = require('body-parser')
 const RawVideo = require('./models/RawVid');
 const TabTime = require('./models/TabTime');
+const ProcessedVid = require('./models/Processed');
 const {spawn} = require("child_process");
 
 
@@ -75,8 +76,10 @@ app.post('/recieveTabTime', async function (req, res) {
     await newTabInfo.save()
 });
 
-app.get('/stats', (req, res) => {
-    res.send("Stats fetched from db are shown here");
+app.get('/stats', async (req, res) => {
+    let data = await ProcessedVid.find( {} ).sort({time:-1})
+    data = data.slice(0,10);
+    res.render("stats.ejs", {data});
 })
 
 app.all('*', (req, res, next) => {
