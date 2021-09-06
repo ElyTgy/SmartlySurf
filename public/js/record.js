@@ -16,6 +16,8 @@ const errorMsgElement = document.querySelector('span#errorMsg');
 const saveSucess = document.querySelector('span#saved');
 const recordedVideo = document.querySelector('video#recorded');
 const recordButton = document.querySelector('button#record');
+const remind = document.querySelector('span#remind');
+const confirm = document.querySelector('span#confirm');
 
 recordButton.addEventListener('click', () => {
   if (recordButton.textContent === 'Start Monitoring') {
@@ -29,6 +31,8 @@ function startMonitoring(){
     startCamera()
     .then(function(){
         recordButton.textContent = 'Stop Monitoring';
+        remind.textContent = "";
+        confirm.textContent="";
         saveSucess.innerHTML = "";
         startRecording();})
     .catch(function(err){

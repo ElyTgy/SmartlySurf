@@ -1,14 +1,18 @@
 <% layout('layouts/boilerplate')%>
+<div>
+  <span id="confirm">Please confirm your choice by clicking the button below.</span>
+</div>
 <div id="container">
   <video id="gum" playsinline autoplay muted></video>
   <video id="recorded" playsinline loop></video>
   <div>
-    <span>Please confirm your choice by clicking the button below.</span> <br>
-  </div>
-  <div>
     <button id="record">Start Monitoring</button>
     <!--<button id="test">Start test</button>-->
   </div>
+  <div class="next">
+    <br>
+   <span id="remind">Once we begin, we will have access to your <br>camera to detect your facial expression.</span>
+ </div>
   <div>
     <span id="errorMsg"></span>
   </div>
