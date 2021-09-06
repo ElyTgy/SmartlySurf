@@ -1,0 +1,17 @@
+<% layout('layouts/boilerplate')%>
+<h1>Usage Statistics</h1>
+<% for (let dict of data){%>
+<div class="card" mb-3>
+    <div class="row">
+        <div class="col-md-4">
+            <span>text</span>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title"><%= dict.url %> </h5>
+                <p class="card-text"><%= dict.time %></p>
+            </div>
+        </div>
+    </div>
+</div>
+<% }%>
