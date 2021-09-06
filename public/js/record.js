@@ -1,5 +1,10 @@
 
-        'use strict';
+'use strict';
+const oneSecond = 1000;
+const oneMinute = 60000
+const saveInterval = oneSecond*10;
+let intervalID;
+let timeoutID;
 
 let startTime;
 let endTime;
@@ -11,9 +16,6 @@ const errorMsgElement = document.querySelector('span#errorMsg');
 const saveSucess = document.querySelector('span#saved');
 const recordedVideo = document.querySelector('video#recorded');
 const recordButton = document.querySelector('button#record');
-const intro = document.querySelector('div#intro');
-const remind = document.querySelector('span#remind');
-
 
 recordButton.addEventListener('click', () => {
   if (recordButton.textContent === 'Start Monitoring') {
@@ -26,10 +28,8 @@ recordButton.addEventListener('click', () => {
 function startMonitoring(){
     startCamera()
     .then(function(){
-      recordButton.textContent = 'Stop Monitoring';
-      intro.textContent ="";
-      remind.textContent="";  
-      saveSucess.innerHTML = "";
+        recordButton.textContent = 'Stop Monitoring';
+        saveSucess.innerHTML = "";
         startRecording();})
     .catch(function(err){
         errorMsgElement.innerHTML = `Enable camera access <a href="chrome://settings/content/camera">here</a> `;
@@ -41,7 +41,7 @@ async function startCamera()
     const constraints = {
         audio: false,
         video: {
-          width: 400, height: 300
+          width: 1280, height: 720
         }
       };
       console.log('Using media constraints:', constraints);
@@ -148,5 +148,3 @@ async function init(constraints) {
     errorMsgElement.innerHTML = `navigator.getUserMedia error:${e.toString()}`;
   }
 }
-
-  
