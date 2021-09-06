@@ -79,7 +79,34 @@ app.post('/recieveTabTime', async function (req, res) {
 app.get('/stats', async (req, res) => {
     let data = await ProcessedVid.find( {} ).sort({time:-1})
     data = data.slice(0,10);
-    res.render("stats.ejs", {data});
+    
+    let finalData = []
+    for(let i = 0; i < 10; i++)
+    {
+        let result = JSON.parse(JSON.stringify(data[i]));
+        let urlObj = new URL(result["url"]);
+        let host = urlObj.host
+        result["website_name"] = host
+
+        let hours = Math.floor(result["time"] / 3600);
+        result["time_hrs"] = hours;
+        
+        result["emotions_names"] = []
+        result["emotions_minutes"] = []
+        for(let j = 0; j < 7; j++)
+        {
+            let current_key = Object.keys(result["emotions"][j])[0]
+            result["emotions_names"].push(current_key)
+            let time_secs = result["emotions"][j][current_key]
+            result["emotions_minutes"].push(Math.floor(time_secs/60))
+        }
+        
+        finalData.push(result)
+    }
+    
+    console.log(finalData)
+    //res.send("res")
+    res.render("stats.ejs", {finalData});
 })
 
 app.all('*', (req, res, next) => {

@@ -1,5 +1,2 @@
 import time
-print("PYTHON HERE,,,,, HELOOOOO!!!!")
-print("Processing data......")
-time.sleep(10)
-print("Processed data")
+print("TESTING: this would be the file that runs when server starts in order to analyze camera data")
