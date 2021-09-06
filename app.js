@@ -7,6 +7,7 @@ const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override'); 
 const bodyParser = require('body-parser')
 const RawVideo = require('./models/RawVid');
+const TabTime = require('./models/TabTime');
 
 mongoose.connect('mongodb://localhost:27017/smartly-surf', {
     useNewUrlParser: true,
@@ -30,6 +31,13 @@ app.use(methodOverride('_method'));
 app.use(express.json({limit: '5000mb'}));
 app.use(express.urlencoded({limit: '5000mb'}));
 app.use("/public", express.static('public'))
+const cors=require("cors");
+const corsOptions ={
+   origin:'*', 
+   credentials:true,            
+   optionSuccessStatus:200,
+}
+app.use(cors(corsOptions)) 
 
 app.get('/', (req, res) => {
     res.render("home.ejs")
@@ -42,6 +50,11 @@ app.get('/record', (req, res) => {
 app.post('/recieveRecording', async function (req, res) {
     let newVid = new RawVideo({startTime:req.body.startTime, endTime:req.body.endTime, video:req.body.video});
     await newVid.save()
+});
+
+app.post('/recieveTabTime', async function (req, res) {
+    let newTabInfo = new TabTime({order:req.body.order, time:req.body.time, host:req.body.host, pathname:req.body.pathname});
+    await newTabInfo.save()
 });
 
 app.get('/stats', (req, res) => {
